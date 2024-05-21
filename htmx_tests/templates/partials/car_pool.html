@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container mt-3">
+    <ul class="nav nav-tabs">
+        
+        {% for city in cities %}
+        <li class="nav-item">
+            <a class="nav-link"
+            name="city"
+            style="cursor: pointer;"
+            hx-get="{% url 'htmx_tests:car_pool_cars' city.pk %}"
+            hx-trigger="click"
+            hx-swap="innterHTML"
+            hx-target="#carpool-cars"
+            >
+                {{city.city}}
+            </a>
+        </li>
+        {% endfor %}
+            
+    </ul>
+    <div class="row">
+        <div id="carpool-cars">
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    

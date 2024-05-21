@@ -1,0 +1,15 @@
+<tr>
+    <td>{{car.car.car_license_plate}}</td>
+    <td>
+        <a
+        style="cursor: pointer;"
+        hx-post="{% url 'htmx_tests:car_pool_remove' car.pk %}"
+        hx-target="#all-cars"
+        hx-trigger="click"
+        hx-swap="beforeend"
+        >
+        -
+        <input type="hidden" name="city" value="{{city.pk}}">
+        </a>
+    </td>
+</tr>
