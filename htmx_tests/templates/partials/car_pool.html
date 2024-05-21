@@ -29,5 +29,18 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const navLinks = document.querySelectorAll(".nav-link");
+    
+      navLinks.forEach(navLink => {
+        navLink.addEventListener("click", function() {
+          navLinks.forEach(otherLink => otherLink.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+    });
+    </script>
+
 {% endblock content %}
     
