@@ -7,6 +7,7 @@
         hx-target="#all-cars"
         hx-trigger="click"
         hx-swap="beforeend"
+        hx-delete="{{car.pk}}"
         >
         -
         <input type="hidden" name="city" value="{{city.pk}}">

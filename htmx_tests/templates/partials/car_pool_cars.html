@@ -16,11 +16,13 @@
                             <td>
                                 <a
                                 style="cursor: pointer;"
-                                hx-post="{% url 'htmx_tests:car_pool_add' car.pk city.pk %}"
-                                hx-target="#filter-cars"
                                 hx-trigger="click"
-                                hx-swap="beforeend"
+                                hx-swap="innerhtml"
+                                hx-delete="{{car.pk}}"
+                                hx-confirm="Säkert?"
                                 >
+                                {% comment %} hx-target="#filter-cars" {% endcomment %}
+                                {% comment %} hx-post="{% url 'htmx_tests:car_pool_add' car.pk city.pk %}" {% endcomment %}
                                     -->
                                     <input type="hidden" name="city" value="{{city.pk}}">
                                 </a>
@@ -51,6 +53,7 @@
                             hx-target="#all-cars"
                             hx-trigger="click"
                             hx-swap="beforeend"
+                            hx-delete="this"
                             >
                             -
                             <input type="hidden" name="city" value="{{city.pk}}">
