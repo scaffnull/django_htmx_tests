@@ -1,0 +1,61 @@
+<div class="row"
+    hx-trigger="resturantSelected from:body"
+    hx-get="{% url 'htmx_tests:emp_pool_workers' resturant.pk %}">
+    <div class="col-md-6">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Emp List</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="all-emp">
+                {% for em in employ %}
+                        <tr>
+                            <td>{{em.name}}</td>
+                            <td>
+                                <a
+                                name="resturant"
+                                style="cursor: pointer;"
+                                hx-trigger="click"
+                                hx-swap="beforeend"
+                                hx-target="#filter-emp"
+                                hx-post="{% url 'htmx_tests:emp_pool_add' em.pk resturant.pk %}">
+                            -->
+                                </a>
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Resturant - {{resturant.name}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="filter-emp">
+                
+                {% for em in emp_filter %}
+                    <tr>
+                        <td>{{em.employee}}</td>
+                        <td>
+                            <a
+                            style="cursor: pointer;"
+                            hx-post="{% url 'htmx_tests:emp_pool_remove' em.pk resturant.pk %}"
+                            hx-target="#all-emp"
+                            hx-trigger="click"
+                            hx-swap="beforeend">
+                            <<--
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
+</div>

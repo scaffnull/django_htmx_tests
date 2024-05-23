@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    
+<div class="container mt-3">
+    <ul class="nav nav-tabs">
+        
+        {% for rest in resturant %}
+            <li class="nav-item">
+                <a class="nav-link"
+                name="resturant"
+                style="cursor: pointer;"
+                hx-get="{% url 'htmx_tests:emp_pool_workers' rest.pk %}"
+                hx-trigger="click"
+                hx-swap="innerHTML"
+                hx-target="#emp-pool"
+                >
+                    {{rest.name}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="row">
+        <div id="emp-pool">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const navLinks = document.querySelectorAll(".nav-link");
+    
+      navLinks.forEach(navLink => {
+        navLink.addEventListener("click", function() {
+          navLinks.forEach(otherLink => otherLink.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+    });
+    </script>
+{% endblock content %}
+    
