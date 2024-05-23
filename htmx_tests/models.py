@@ -47,3 +47,27 @@ class CarPool(models.Model):
 '''
 END CARPOOL TEST SECTION
 ''' 
+
+
+'''
+SECTION FOR RESTURANT WORKERS
+'''
+
+class Employee(models.Model):
+    """Name of the employee"""
+    name = models.CharField(max_length=100)
+    start_date = models.DateField()
+
+class Resturant(models.Model):
+    """Name of the resturant where employee works"""
+    name = models.CharField(max_length=50, unique=True)
+
+class EmpPool(models.Model):
+    """Employee pool, many to many (for time reporting later)"""
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    resturant = models.ManyToManyField(Resturant)
+
+
+'''
+END RESTURANT WORKERS SECTION
+'''
