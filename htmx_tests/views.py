@@ -61,7 +61,10 @@ def car_pool_remove(request, pk):
             after="swap")
 
 
-"""Section EmplPool test with HTMX"""
+"""Section EmplPool test with HTMX
+This is the same concept as the CarPool, but this uses a
+FK and M2M in the model.
+"""
 
 def emp_pool(request):
     employees = Employee.objects.all().order_by('name')
