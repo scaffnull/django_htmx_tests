@@ -58,14 +58,24 @@ class Employee(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class Resturant(models.Model):
     """Name of the resturant where employee works"""
     name = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.name
+    
 
 class EmpPool(models.Model):
     """Employee pool, many to many (for time reporting later)"""
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    resturant = models.ManyToManyField(Resturant)
+    resturant = models.ManyToManyField(Resturant, blank=True)
+
+    def __str__(self):
+        return f"{self.employee.name}"
 
 
 '''
