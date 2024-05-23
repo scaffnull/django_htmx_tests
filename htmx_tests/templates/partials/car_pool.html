@@ -13,7 +13,7 @@
             style="cursor: pointer;"
             hx-get="{% url 'htmx_tests:car_pool_cars' city.pk %}"
             hx-trigger="click"
-            hx-swap="innterHTML"
+            hx-swap="innerHTML"
             hx-target="#carpool-cars"
             >
                 {{city.city}}
