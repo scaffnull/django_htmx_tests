@@ -70,7 +70,7 @@ class Resturant(models.Model):
     
 
 class EmpPool(models.Model):
-    """Employee pool, many to many (for time reporting later)"""
+    """Employee pool, one employee can be working at many resturants at the same time"""
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     resturant = models.ManyToManyField(Resturant, blank=True)
 
