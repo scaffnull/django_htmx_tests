@@ -90,7 +90,7 @@ def emp_pool_add(request, pk, rest_id):
     emp = get_object_or_404(EmpPool, pk=pk)
     print(emp)
     if request.htmx:
-        emp.resturant.set([resturant])
+        emp.resturant.add(resturant)
         emp.save()
         return trigger_client_event(
             HttpResponse(''),
