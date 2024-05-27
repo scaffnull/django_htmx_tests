@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'htmx_tests',
     'django_htmx',
+    'django-filter',
 ]
 
 MIDDLEWARE = [
