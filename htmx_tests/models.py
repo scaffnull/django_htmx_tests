@@ -81,3 +81,20 @@ class EmpPool(models.Model):
 '''
 END RESTURANT WORKERS SECTION
 '''
+
+'''
+SECTION FOR SOCIAL MEDIA
+'''
+
+class SocialMedia(models.Model):
+    """Social media, active/inactive following list"""
+    name = models.CharField(max_length=255)
+    is_following = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+'''
+END SOCIAL MEDIA SECTION
+'''

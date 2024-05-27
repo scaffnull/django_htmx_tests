@@ -6,7 +6,8 @@ from .models import (
     CarType, 
     Employee, 
     EmpPool, 
-    Resturant,)
+    Resturant,
+    SocialMedia,)
 # Register your models here.
 
 admin.site.register(City)
@@ -16,3 +17,4 @@ admin.site.register(CarType)
 admin.site.register(Employee)
 admin.site.register(EmpPool)
 admin.site.register(Resturant)
+admin.site.register(SocialMedia)
