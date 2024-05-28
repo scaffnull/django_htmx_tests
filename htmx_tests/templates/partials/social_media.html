@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="form-row d-flex">
+        <form method="get">
+            {{form|crispy}}
+            <input type="submit" value="Search" class="btn btn-success">
+        </form>
+    </div>
+    <div class="row">
+        <div id="social-list">
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Following</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for social in social %}
+                <tr>
+                    {% if social.is_following %}
+                    <td>{{social.name}}</td>
+                    <td>
+                        <a
+                        hx-get="{% url 'htmx_tests:social_media_unfollow' social.pk %}"
+                        hx-trigger="click"
+                        style="cursor: pointer;"
+                        hx-confirm="You sure you want to unfollow {{social.name}}?"
+                        hx-target="#social-list">
+                            ✅
+                        </a>
+                    </td>   
+                    <td>
+                        {{social.category.name}}
+                    </td>
+                    {% else %}
+                    <td class="text-danger">{{social.name}}</td>
+                    <td >
+                        <a
+                        hx-get="{% url 'htmx_tests:social_media_follow' social.pk %}"
+                        hx-trigger="click"
+                        style="cursor: pointer;"
+                        hx-confirm="You sure you want to follow {{social.name}}?"
+                        hx-target="#social-list">
+                            ⛔️
+                        </a>
+                        </td>    
+                    <td class="text-danger">
+                        {{social.category.name}}
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                <tr class="fw-bold">
+                    <td></td>
+                    <td>
+                        Following count: {{following_count}}
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+    
+</div>
+{% endblock content %}
+    
