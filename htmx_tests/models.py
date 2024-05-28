@@ -86,8 +86,16 @@ END RESTURANT WORKERS SECTION
 SECTION FOR SOCIAL MEDIA
 '''
 
+class Category(models.Model):
+    """What category the person is active in"""
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class SocialMedia(models.Model):
     """Social media, active/inactive following list"""
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     is_following = models.BooleanField(default=True)
 
