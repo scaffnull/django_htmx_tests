@@ -1,4 +1,4 @@
-from django_filters import FilterSet, ModelChoiceFilter
+from django_filters import FilterSet, ModelChoiceFilter, OrderingFilter
 
 from .models import (
     Category,
@@ -8,10 +8,12 @@ from .models import (
 class CategoryFilter(FilterSet):
     """Filter on category in Socialmediauser list"""
     category = ModelChoiceFilter(
-                    queryset=Category.objects.all(),
+                    queryset=Category.objects.all().order_by('name'),
                     empty_label="All Categories",
                     label="Category")
+    # order_by = OrderingFilter(
+    #     fields=('category__name',),
+    # )
     class Meta:
         model = SocialMedia
         fields = ['category',]
-        order_by = ('name',)
