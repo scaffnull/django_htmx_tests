@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 django-htmx = "*"
+django-filter = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
 
 [dev-packages]
 
