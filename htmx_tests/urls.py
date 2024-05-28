@@ -15,4 +15,9 @@ urlpatterns = [
     path("emp_pool/<int:pk>/", views.emp_pool_workers, name="emp_pool_workers"),
     path("emp_pool/<int:pk>/<int:rest_id>/add/", views.emp_pool_add, name="emp_pool_add"),
     path("emp_pool/<int:pk>/<int:rest_id>/remove/", views.emp_pool_remove, name="emp_pool_remove"),
+    # SOC MEDIA
+    path("social_media/", views.social_media, name="social_media"),
+    path("social_media_list/", views.social_media_list, name="social_media_list"),
+    path("social_media/unfollow/<int:pk>/", views.social_media_unfollow, name="social_media_unfollow"),
+    path("social_media/follow/<int:pk>/", views.social_media_follow, name="social_media_follow"),
 ]
