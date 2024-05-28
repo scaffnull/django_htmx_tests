@@ -158,7 +158,7 @@ def social_media_unfollow(request, pk):
     if request.htmx:
         name.is_following = False
         name.save()
-        social = SocialMedia.objects.filter(category=name.category) 
+        social = SocialMedia.objects.filter(category=name.category).order_by('name')
         following_count = social.filter(is_following=True).count()
         return render(request, 'partials/social_media_htmx.html', {
             'social':social,
@@ -171,7 +171,7 @@ def social_media_follow(request, pk):
     if request.htmx:
         name.is_following = True
         name.save()
-        social = SocialMedia.objects.filter(category=name.category)
+        social = SocialMedia.objects.filter(category=name.category).order_by('name')
         following_count = social.filter(is_following=True).count()
         return render(request, 'partials/social_media_htmx.html', {
             'social':social,
