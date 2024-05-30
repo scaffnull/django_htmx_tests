@@ -121,9 +121,15 @@ class Company(models.Model):
     name = models.CharField(max_length=50)
     place = models.ForeignKey(Location, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 class Orderer(models.Model):
     orderer = models.CharField(max_length=50)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.orderer
 
 class OrderSummary(models.Model):
     order_number = models.IntegerField()
@@ -132,6 +138,14 @@ class OrderSummary(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     orderer = models.ForeignKey(Orderer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.order_number}: {self.location.place}"
+    
+    class Meta:
+        """Make sure order_number can not same for the same location, but can be
+        same but for other locations"""
+        unique_together = ('location', 'order_number')
 
 '''
 END ORDERS SECTION
