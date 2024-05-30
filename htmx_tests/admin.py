@@ -8,7 +8,11 @@ from .models import (
     EmpPool, 
     Resturant,
     SocialMedia,
-    Category)
+    Category,
+    Location,
+    Company,
+    Orderer,
+    OrderSummary)
 # Register your models here.
 
 admin.site.register(City)
@@ -20,3 +24,7 @@ admin.site.register(EmpPool)
 admin.site.register(Resturant)
 admin.site.register(SocialMedia)
 admin.site.register(Category)
+admin.site.register(Location)
+admin.site.register(Company)
+admin.site.register(Orderer)
+admin.site.register(OrderSummary)

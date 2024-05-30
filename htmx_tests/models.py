@@ -106,3 +106,33 @@ class SocialMedia(models.Model):
 '''
 END SOCIAL MEDIA SECTION
 '''
+
+
+'''
+SECTION FOR ORDERS
+'''
+class Location(models.Model):
+    place = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.place
+
+class Company(models.Model):
+    name = models.CharField(max_length=50)
+    place = models.ForeignKey(Location, on_delete=models.CASCADE)
+
+class Orderer(models.Model):
+    orderer = models.CharField(max_length=50)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+class OrderSummary(models.Model):
+    order_number = models.IntegerField()
+    order_for = models.CharField(max_length=200)
+    order_invoice = models.CharField(max_length=200)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    orderer = models.ForeignKey(Orderer, on_delete=models.CASCADE)
+
+'''
+END ORDERS SECTION
+'''

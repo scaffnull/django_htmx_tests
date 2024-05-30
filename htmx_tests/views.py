@@ -148,7 +148,6 @@ def social_media_list(request, selected_value):
                             queryset=SocialMedia.objects.none().order_by('name'))
     selected_value = category_filter.data.get('category')   
     social = SocialMedia.objects.filter(category=selected_value)
-
     return render(request, 'partials/social_media_htmx.html', {
         'social':social,
     })   
