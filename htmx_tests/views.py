@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django_htmx.http import trigger_client_event
+from django.views.generic.edit import CreateView, UpdateView
 from .models import (
     City,
     Car,
@@ -9,7 +11,11 @@ from .models import (
     Resturant,
     EmpPool,
     SocialMedia,
-    Category)
+    Category,
+    Location,
+    Company,
+    Orderer,
+    OrderSummary)
 from .filters import CategoryFilter
 
 # Create your views here.
@@ -179,4 +185,65 @@ def social_media_follow(request, pk):
 
 '''
 END SOCIAL MEDIA SECTION
+'''
+
+
+'''
+SECTION ORDERS
+'''
+
+def location_list(request):
+    location = Location.objects.all().order_by('place')
+    return render(request, 'htmx_tests/location.html', {
+        'location':location,
+    })
+
+class LocationCreate(CreateView):
+    model = Location
+    template_name = 'htmx_tests/location_create.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:location_list')
+
+class LocationEdit(UpdateView):
+    model = Location
+    template_name = 'htmx_tests/location_edit.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:location_list')
+
+
+def company_list(request):
+    company = Company.objects.all().order_by('name')
+    return render(request, 'htmx_tests/company.html', {
+        'company':company,
+    })
+
+class CompanyCreate(CreateView):
+    model = Company
+    template_name = 'htmx_tests/company_create.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:company_list')
+
+class CompanyEdit(UpdateView):
+    model = Company
+    template_name = 'htmx_tests/company_edit.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:company_list')
+
+
+def orderer_list(request):
+    orderer = Orderer.objects.all()
+    return render(request, 'htmx_tests/orderer.html', {
+        'orderer':orderer,
+    })
+
+
+def order_summary_list(request):
+    order_summary = OrderSummary.objects.all()
+    return render(request, 'htmx_tests/order_summary.html',{
+        'order_summary':order_summary,
+    })
+
+
+'''
+END ORDERS SECTION
 '''

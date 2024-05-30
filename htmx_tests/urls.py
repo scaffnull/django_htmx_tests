@@ -20,4 +20,14 @@ urlpatterns = [
     path("social_media_list/", views.social_media_list, name="social_media_list"),
     path("social_media/unfollow/<int:pk>/", views.social_media_unfollow, name="social_media_unfollow"),
     path("social_media/follow/<int:pk>/", views.social_media_follow, name="social_media_follow"),
+
+    # ORDERERS
+    path("location_list/", views.location_list, name="location_list"),
+    path("location_create", views.LocationCreate.as_view(), name="location_create"),
+    path("location_edit/<int:pk>/", views.LocationEdit.as_view(), name="location_edit"),
+    path("company_list/", views.company_list, name="company_list"),
+    path("company_create/", views.CompanyCreate.as_view(), name="company_create"),
+    path("company_edit/<int:pk>/", views.CompanyEdit.as_view(), name="company_edit"),
+    path("orderer_list/", views.orderer_list, name="orderer_list"),
+    path("order_summary_list/", views.order_summary_list, name="order_summary_list"),
 ]

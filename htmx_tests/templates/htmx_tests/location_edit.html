@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <a class="btn btn-primary" href="{% url 'htmx_tests:order_summary_list' %}">Orders</a>
+            <a class="btn btn-secondary" href="{% url 'htmx_tests:location_create' %}">Add new Location</a>
+            <a class="btn btn-outline-warningas" href="{% url 'htmx_tests:location_list' %}">Location List</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <h3>Edit: {{location.place}}</h3>
+        <div class="col-md-3">
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-success" type="submit">
+                    Edit location
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
+    
