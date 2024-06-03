@@ -6,16 +6,16 @@
 <div class="container mt-4">
     <div class="row mb-3">
         <div class="col-md-6">
-            <a class="btn btn-outline-warning" href="{% url 'htmx_tests:company_list' %}">Back</a>
+            <a class="btn btn-outline-warning" href="{% url 'htmx_tests:orderer_list' %}">Back</a>
         </div>
     </div>
-    <h2>Create Company</h2>
+    <h2>Create new Orderer</h2>
     <div class="row">
         <div class="col-md-3">
             <form method="post" class="mt-3">
                 {% csrf_token %}
                 {{form.as_p}}
-                <button class="btn btn-outline-success" type="submit">Create Company</button>
+                <button class="btn btn-outline-success" type="submit">Create Orderer</button>
             </form>
         </div>
     </div>

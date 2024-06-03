@@ -1,7 +1,44 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-<p>Hi from orderer</p>
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <a class="btn btn-primary" href="{% url 'htmx_tests:order_summary_list' %}">Orders</a>
+            <a class="btn btn-secondary" href="{% url 'htmx_tests:orderer_create' %}">Add new Orderer</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Orderers</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Orderer Name</th>
+                        <th>Company</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orderer %}
+                    <tr>
+                        <td>{{order.orderer}}</td>
+                        <td>{{order.company.name}}</td>
+                        <td>
+                            <a href="{% url 'htmx_tests:orderer_edit' order.pk %}">✏️</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="fw-bold">Count: {{count}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
     
 {% endblock content %}

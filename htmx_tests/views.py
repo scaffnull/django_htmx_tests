@@ -194,8 +194,10 @@ SECTION ORDERS
 
 def location_list(request):
     location = Location.objects.all().order_by('place')
+    count = location.count()
     return render(request, 'htmx_tests/location.html', {
         'location':location,
+        'count':count,
     })
 
 class LocationCreate(CreateView):
@@ -213,8 +215,10 @@ class LocationEdit(UpdateView):
 
 def company_list(request):
     company = Company.objects.all().order_by('name')
+    count = company.count()
     return render(request, 'htmx_tests/company.html', {
         'company':company,
+        'count':count,
     })
 
 class CompanyCreate(CreateView):
@@ -231,10 +235,24 @@ class CompanyEdit(UpdateView):
 
 
 def orderer_list(request):
-    orderer = Orderer.objects.all()
+    orderer = Orderer.objects.all().order_by('company__name')
+    count = orderer.count()
     return render(request, 'htmx_tests/orderer.html', {
         'orderer':orderer,
+        'count':count,
     })
+
+class OrdererCreate(CreateView):
+    model = Orderer
+    template_name = 'htmx_tests/orderer_create.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:orderer_list')
+
+class OrdererEdit(UpdateView):
+    model = Orderer
+    template_name = 'htmx_tests/orderer_edit.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:orderer_list')
 
 
 def order_summary_list(request):

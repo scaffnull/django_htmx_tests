@@ -29,5 +29,7 @@ urlpatterns = [
     path("company_create/", views.CompanyCreate.as_view(), name="company_create"),
     path("company_edit/<int:pk>/", views.CompanyEdit.as_view(), name="company_edit"),
     path("orderer_list/", views.orderer_list, name="orderer_list"),
+    path("orderer_create", views.OrdererCreate.as_view(), name="orderer_create"),
+    path("orderer_edit/<int:pk>/", views.OrdererEdit.as_view(), name="orderer_edit"),
     path("order_summary_list/", views.order_summary_list, name="order_summary_list"),
 ]
