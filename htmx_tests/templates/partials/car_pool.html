@@ -4,6 +4,7 @@
 {% block content %}
 
 <div class="container mt-3">
+  <p class="fst-italic">Car pool: This is a FK module. (Model CarPool has FK to "city" and "car") One car can only be at one location. Left table displays the cars with no "city" set. Right table displays all the cars active on the location. Uses hx-post to send the cars back and forth from the tables</p>
     <ul class="nav nav-tabs">
         
         {% for city in cities %}

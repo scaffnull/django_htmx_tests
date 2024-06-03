@@ -4,6 +4,14 @@
 {% block content %}
     
 <div class="container mt-3">
+    <p class="fst-italic">
+        Employee Pool: This uses a M2M relationship. 
+        So one Employee can be active at many resturants at the same time, 
+        but same principle as the Car Pool. 
+        Left table shows people that are not active on that resturant, 
+        and the right table displays employees active at the resturant that is clicked from the nav tabs.
+    </p>
+
     <ul class="nav nav-tabs">
         
         {% for rest in resturant %}

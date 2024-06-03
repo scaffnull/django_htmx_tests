@@ -6,6 +6,16 @@
 
 {% block content %}
 <div class="container">
+    <p class="fst-italic">
+        Social media model: This model displays users with their category, and the user can choose to follow or not follow the account. 
+        Initial list is blank, but the user has the ability to choose what category, and filter from there.
+        When a user decides to follow/unfollow, a confirm box appears, then using htmx it updates the page.
+    </p>
+    <p class="fst-italic fw-bold">
+        TODO: When "All Categories" is filtered at the moment and a user click follow/unfollow, 
+        the htmx page filters on the category and only displays the users within that category. 
+        So need to fix if a user follow/unfollow with "All categories" filtered :)
+    </p>
     <div class="form-row d-flex">
         <form method="get">
             {{form|crispy}}
