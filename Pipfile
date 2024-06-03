@@ -9,6 +9,8 @@ django-htmx = "*"
 django-filter = "*"
 django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
+django-forms-dynamic = "*"
+django-widget-tweaks = "*"
 
 [dev-packages]
 
