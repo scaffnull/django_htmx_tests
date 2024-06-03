@@ -2,6 +2,12 @@
 
 {% block content %}
 <div class="container mt-4">
+    <p class="fst-italic">
+        Order module: This section is used to create orders and then list them (main focus is the create order part). 
+        Having a 3-chained dropdown, and have them be dependent on each other,
+        so if one Company is choosen, then only the orderer from that company is 
+        available in the dropdown. 
+    </p>
     <ul class="nav nab-tabs">
         <li class="nav-item">
             <a class="nav-link" href="{% url 'htmx_tests:location_list' %}">Location</a>
