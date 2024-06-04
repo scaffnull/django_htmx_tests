@@ -23,6 +23,38 @@
         </li>
         
     </ul>
+
+
+    <hr>
+    <hr>
+    <div class="mt-4">
+        <h4>Order table</h4>
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Order nr</th>
+                    <th>Orderer Name</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Order for</th>
+                    <th>Order invoice</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in order_summary %}
+                    <tr>
+                        <td>{{order.order_number}}</td>
+                        <td>{{order.orderer}}</td>
+                        <td>{{order.company}}</td>
+                        <td>{{order.location}}</td>
+                        <td>{{order.order_for}}</td>
+                        <td>{{order.order_invoice}}</td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
 </div>
     
 {% endblock content %}
