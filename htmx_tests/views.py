@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django_htmx.http import trigger_client_event
 from django.views.generic.edit import CreateView, UpdateView
@@ -263,21 +263,10 @@ def order_summary_list(request):
     })
 
 def new_order(request):
-    if request.method == "POST":
-        form = NewOrderForm(request.POST)
-        print(form)
-        if form.is_valid():
-            print(form.cleaned_data['location'])
-            print(form.cleaned_data['company'])
-            print(form.cleaned_data['orderer'])
-            print(form.cleaned_data['order_number'])
-            print(form.cleaned_data['order_for'])
-            print(form.cleaned_data['order_invoice'])
-        else:
-            print(form.errors)
-    else:
-        form = NewOrderForm()
-    form = NewOrderForm
+    form = NewOrderForm(request.POST or None)
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('htmx_tests:order_summary_list')
     return render(request, 'htmx_tests/new_order.html', {
         'form':form,
     })

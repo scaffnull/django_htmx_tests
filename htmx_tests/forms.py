@@ -27,7 +27,7 @@ class OrderForm(DynamicFormMixin, forms.Form):
         initial=initial_module,
     )
 
-class NewOrderForm(forms.Form):
+class NewOrderForm(forms.ModelForm):
     location = forms.ModelChoiceField(queryset=Location.objects.all().order_by('place'),
                                       empty_label="Select Location",
             widget=forms.Select(attrs={"hx-get":"load_companies", "hx-target": "#id_company"}))
@@ -53,6 +53,10 @@ class NewOrderForm(forms.Form):
             self.fields["company"].queryset = Company.objects.filter(location_id=location_id)
             company_id = int(self.data.get("company"))
             self.fields["orderer"].queryset = Orderer.objects.filter(company_id=company_id)
+
+    class Meta:
+        model = OrderSummary
+        fields = ['location', 'company', 'orderer', 'order_number', 'order_for', 'order_invoice']
     
 # FROM YOUTUBE: https://www.youtube.com/watch?v=UCl5O-XVChk&t=1s
     
