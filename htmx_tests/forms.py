@@ -36,10 +36,14 @@ class NewOrderForm(forms.Form):
             widget=forms.Select(attrs={"hx-get":"load_orderers", "hx-target": "#id_orderer"}))
     orderer = forms.ModelChoiceField(queryset=Orderer.objects.none(),
                                      empty_label="Select Orderer",
+            widget=forms.Select(attrs={"hx-get":"selected_orderers", "hx-target":"#id_selected_orderer"})
                                     )
+    selected_orderer = forms.ModelChoiceField(queryset=Orderer.objects.none(),
+                                              widget=forms.HiddenInput(),
+                                              required=False)
     order_number = forms.IntegerField(label="Order Number")
     order_for = forms.CharField(label="Order For", max_length=200)
-    order_invoice = forms.CharField(label="Order Invoice", max_length=200)
+    order_invoice = forms.CharField(label="Order Invoice", max_length=200)  
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

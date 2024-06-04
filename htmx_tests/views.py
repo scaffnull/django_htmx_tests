@@ -265,11 +265,14 @@ def order_summary_list(request):
 def new_order(request):
     if request.method == "POST":
         form = NewOrderForm(request.POST)
-        print(request.POST)
+        print(form)
         if form.is_valid():
             print(form.cleaned_data['location'])
             print(form.cleaned_data['company'])
             print(form.cleaned_data['orderer'])
+            print(form.cleaned_data['order_number'])
+            print(form.cleaned_data['order_for'])
+            print(form.cleaned_data['order_invoice'])
         else:
             print(form.errors)
     else:
@@ -282,26 +285,26 @@ def new_order(request):
 def load_companies(request):
     location_id = request.GET.get('location')
     companies = Company.objects.filter(location_id=location_id)
-    print(companies)
     return render(request, 'partials/option_companies.html', {
         'companies':companies,
     })
 
 def load_orderers(request):
     company_id = request.GET.get('company')
-    print(company_id)
     orderers = Orderer.objects.filter(company_id=company_id)
-    print(orderers)
     return render(request, 'partials/option_orderers.html', {
         'orderers':orderers,
     })
 
-def orderer_selected(request):
+# NOT OPTIMAL BUT MAKES THE ORDERS WORK?
+# What happens is that I fecth this from the forms.py and have it hidden,
+# just to keep the lists available still in "Create New Order"
+def selected_orderers(request):
     orderer_id = request.GET.get('orderer')
-    print(orderer_id)
-
-def new_order_submit(request):
-    pass
+    order = Orderer.objects.get(pk=orderer_id)
+    return render(request, 'partials/orderer_selected.html', {
+        'order':order,
+    })
 
 '''
 END ORDERS SECTION
