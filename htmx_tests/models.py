@@ -119,7 +119,7 @@ class Location(models.Model):
 
 class Company(models.Model):
     name = models.CharField(max_length=50)
-    place = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
