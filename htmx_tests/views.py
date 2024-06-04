@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django_htmx.http import trigger_client_event
 from django.views.generic.edit import CreateView, UpdateView
+from .forms import OrderForm, NewOrderForm
 from .models import (
     City,
     Car,
@@ -261,6 +262,46 @@ def order_summary_list(request):
         'order_summary':order_summary,
     })
 
+def new_order(request):
+    if request.method == "POST":
+        form = NewOrderForm(request.POST)
+        print(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data['location'])
+            print(form.cleaned_data['company'])
+            print(form.cleaned_data['orderer'])
+        else:
+            print(form.errors)
+    else:
+        form = NewOrderForm()
+    form = NewOrderForm
+    return render(request, 'htmx_tests/new_order.html', {
+        'form':form,
+    })
+
+def load_companies(request):
+    location_id = request.GET.get('location')
+    companies = Company.objects.filter(location_id=location_id)
+    print(companies)
+    return render(request, 'partials/option_companies.html', {
+        'companies':companies,
+    })
+
+def load_orderers(request):
+    company_id = request.GET.get('company')
+    print(company_id)
+    orderers = Orderer.objects.filter(company_id=company_id)
+    print(orderers)
+    return render(request, 'partials/option_orderers.html', {
+        'orderers':orderers,
+    })
+
+def orderer_selected(request):
+    orderer_id = request.GET.get('orderer')
+    print(orderer_id)
+
+def new_order_submit(request):
+    pass
 
 '''
 END ORDERS SECTION

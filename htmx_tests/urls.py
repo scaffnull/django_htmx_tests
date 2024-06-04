@@ -32,4 +32,7 @@ urlpatterns = [
     path("orderer_create", views.OrdererCreate.as_view(), name="orderer_create"),
     path("orderer_edit/<int:pk>/", views.OrdererEdit.as_view(), name="orderer_edit"),
     path("order_summary_list/", views.order_summary_list, name="order_summary_list"),
+    path("new_order/", views.new_order, name="new_order"),
+    path("new_order/load_companies/", views.load_companies, name="load_companies"),
+    path("new_order/load_orderers", views.load_orderers, name="load_orderers"),
 ]

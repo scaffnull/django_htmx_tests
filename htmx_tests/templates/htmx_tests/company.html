@@ -24,7 +24,7 @@
                     {% for comp in company %}
                     <tr>
                         <td>{{comp.name}}</td>
-                        <td>{{comp.place}}</td>
+                        <td>{{comp.location}}</td>
                         <td>
                             <a href="{% url 'htmx_tests:company_edit' comp.pk %}">✏️</a>
                         </td>
