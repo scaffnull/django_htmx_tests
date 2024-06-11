@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse_lazy
 from django_htmx.http import trigger_client_event
 from django.views.generic.edit import CreateView, UpdateView
-from .forms import OrderForm, NewOrderForm
+from .forms import NewOrderForm
 from .models import (
     City,
     Car,
@@ -258,9 +258,17 @@ class OrdererEdit(UpdateView):
 
 def order_summary_list(request):
     order_summary = OrderSummary.objects.all()
+    count = order_summary.count()
     return render(request, 'htmx_tests/order_summary.html',{
         'order_summary':order_summary,
+        'count':count,
     })
+
+class OrderSummaryEdit(UpdateView):
+    model = OrderSummary
+    template_name = 'htmx_tests/order_summary_edit.html'
+    fields = '__all__'
+    success_url = reverse_lazy('htmx_tests:order_summary_list')
 
 def new_order(request):
     form = NewOrderForm(request.POST or None)
