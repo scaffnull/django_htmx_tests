@@ -2,31 +2,7 @@ from django import forms
 from .models import Location, Company, Orderer, OrderSummary
 from dynamic_forms import DynamicField, DynamicFormMixin
 
-
-class OrderForm(DynamicFormMixin, forms.Form):
-    """Order form for a new Order"""
-
-    def module_choices(form):
-        location = form['location'].value()
-        return Company.objects.filter(location=location)
-    
-    def initial_module(form):
-        location = form['location'].value()
-        return Company.objects.filter(location=location)
-
-
-    location = forms.ModelChoiceField(
-        queryset=Location.objects.all().order_by('place'),
-        label="Location",
-        empty_label="All Locations"
-    )
-
-    companies = DynamicField(
-        forms.ModelChoiceField,
-        queryset=module_choices,
-        initial=initial_module,
-    )
-
+"""Form for Creating a new order with 3 chained dropdown + extra fields"""
 class NewOrderForm(forms.ModelForm):
     location = forms.ModelChoiceField(queryset=Location.objects.all().order_by('place'),
                                       empty_label="Select Location",
