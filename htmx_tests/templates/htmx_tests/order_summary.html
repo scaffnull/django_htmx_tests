@@ -38,6 +38,7 @@
                     <th>Location</th>
                     <th>Order for</th>
                     <th>Order invoice</th>
+                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,9 +50,20 @@
                         <td>{{order.location}}</td>
                         <td>{{order.order_for}}</td>
                         <td>{{order.order_invoice}}</td>
+                        <td>
+                            <a href="{% url 'htmx_tests:order_summary_edit' order.pk%}">✏️</a>
+                        </td>
                     </tr>
                 {% endfor %}
-                    
+                    <tr>
+                        <td class="fw-bold">Orders: {{count}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
             </tbody>
         </table>
     </div>

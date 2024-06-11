@@ -4,7 +4,15 @@
 
 {% block content %}
 <div class="container">
+    <p class="fst-italic">
+        This is the 3 chained dropdown, each dependent on each other. 
+        You can't choose any Company without choosing Location, and same with 
+        Orderer and Company
+    </p>
     <div class="col-md-3">
+        <div class="col-md-6 my-2">
+            <a href="{% url 'htmx_tests:order_summary_list'%}" class="btn btn-primary">Back</a>
+        </div>
         <form method="post">
             {% csrf_token %}
             {{form|crispy}}
