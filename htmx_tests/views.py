@@ -257,7 +257,7 @@ class OrdererEdit(UpdateView):
 
 
 def order_summary_list(request):
-    order_summary = OrderSummary.objects.all()
+    order_summary = OrderSummary.objects.all().order_by('order_number')
     count = order_summary.count()
     return render(request, 'htmx_tests/order_summary.html',{
         'order_summary':order_summary,
