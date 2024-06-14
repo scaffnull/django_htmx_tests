@@ -11,6 +11,7 @@ django-crispy-forms = "*"
 crispy-bootstrap5 = "*"
 django-forms-dynamic = "*"
 django-widget-tweaks = "*"
+django-simple-history = "*"
 
 [dev-packages]
 
