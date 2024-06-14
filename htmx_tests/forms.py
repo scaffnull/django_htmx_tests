@@ -1,8 +1,13 @@
 from django import forms
 from .models import Location, Company, Orderer, OrderSummary
 from dynamic_forms import DynamicField, DynamicFormMixin
+from crispy_forms.layout import Layout, Div, Column
+from crispy_forms.helper import FormHelper
 
 """Form for Creating a new order with 3 chained dropdown + extra fields"""
+class Row(Div):
+    css_class = 'row'
+
 class NewOrderForm(forms.ModelForm):
     location = forms.ModelChoiceField(queryset=Location.objects.all().order_by('place'),
                                       empty_label="Select Location",
@@ -23,6 +28,13 @@ class NewOrderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('location','company', 'orderer', wrapper_class='form-group col-2 mb-0'),
+                Column('order_number', 'order_for', 'order_invoice', wrapper_class='form-group col-4 mb-0'),
+            )
+        )
 
         if "location" in self.data and "company" in self.data:
             location_id = int(self.data.get("location"))
@@ -33,6 +45,7 @@ class NewOrderForm(forms.ModelForm):
     class Meta:
         model = OrderSummary
         fields = ['location', 'company', 'orderer', 'order_number', 'order_for', 'order_invoice']
+
     
 # FROM YOUTUBE: https://www.youtube.com/watch?v=UCl5O-XVChk&t=1s
     

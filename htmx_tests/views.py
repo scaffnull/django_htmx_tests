@@ -270,6 +270,27 @@ class OrderSummaryEdit(UpdateView):
     fields = '__all__'
     success_url = reverse_lazy('htmx_tests:order_summary_list')
 
+def order_summary_history(request, orderer_id):
+    """OrderSummary history table"""
+    ordersummary = OrderSummary.objects.get(pk=orderer_id)
+    ch = ordersummary.history.all()
+    # To fetch the history
+    changes = []
+    if ch is not None and orderer_id:
+        last = ch.first()
+        for all_changes in range(ch.count()):
+            new_record, old_record = last, last.prev_record
+            if old_record is not None:
+                delta = new_record.diff_against(old_record)
+                changes.append(delta)
+            last = old_record
+
+    return render(request, 'htmx_tests/order_summary_history.html', {
+        'ordersummary':ordersummary,
+        'ch':ch,
+        'changes':changes,
+    })
+
 def new_order(request):
     form = NewOrderForm(request.POST or None)
     if request.POST and form.is_valid():

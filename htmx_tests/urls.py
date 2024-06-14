@@ -33,6 +33,7 @@ urlpatterns = [
     path("orderer_edit/<int:pk>/", views.OrdererEdit.as_view(), name="orderer_edit"),
     path("order_summary_list/", views.order_summary_list, name="order_summary_list"),
     path("order_summary/edit/<int:pk>/", views.OrderSummaryEdit.as_view(), name="order_summary_edit"),
+    path("order_summary_history/<int:orderer_id>/", views.order_summary_history, name="order_summary_history"),
     path("new_order/", views.new_order, name="new_order"),
     path("new_order/load_companies/", views.load_companies, name="load_companies"),
     path("new_order/load_orderers/", views.load_orderers, name="load_orderers"),

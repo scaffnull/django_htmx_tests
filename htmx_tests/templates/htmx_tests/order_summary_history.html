@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="container d-flex justify-content-end">
+        <div>
+            <a class="btn btn-outline-warning" href="{% url 'htmx_tests:order_summary_list' %}">Back</a>
+        </div>
+    </div>
+
+    <section class="order-summary-table">
+        <h2>Order number: {{ordersummary.order_number}}, Orderer: {{ordersummary.orderer.orderer}}</h2>
+        <div class="row">
+            <div class="col-10">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>Changes</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for change in changes %}
+                            <tr>
+                                <td>{{change.new_record.history_date}}</td>
+                                <td>
+                                    {% if change.changed_fields|length > 0 %}
+                                        {% for change_by_id in change.changes %}
+                                            <b>{{change_by_id.field|title}}</b> | changed from:
+                                            {% if change_by_id.old %}
+                                                <span class="fst-italic" style="text-decoration: line-through;">
+                                                    {{change_by_id.old}}
+                                                </span>
+                                                {% else %}
+                                                <span class="fst-italic">none</span>
+                                            {% endif %}
+                                                ---> <b>{{change_by_id.new}}</b>
+                                        {% endfor %}
+                                            {% else %}
+                                            No change
+                                    {% endif %}
+                                </td>
+                            </tr>                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock content %}
+    

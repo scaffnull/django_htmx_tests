@@ -6,8 +6,9 @@
         Order module: This section is used to create orders and then list them (main focus is the create order part). 
         Having a 3-chained dropdown, and have them be dependent on each other,
         so if one Company is choosen, then only the orderer from that company is 
-        available in the dropdown. 
+        available in the dropdown.
     </p>
+    <p><span class="fw-bold">ADDED: </span>django-history to the OrderSummary model</p>
     <ul class="nav nab-tabs">
         <li class="nav-item fw-bold">
             <a class="nav-link" href="{% url 'htmx_tests:new_order' %}">Create New Order</a>
@@ -28,7 +29,7 @@
     <hr>
     <hr>
     <div class="mt-4">
-        <h4>Order table</h4>
+        <h4>Order list/table</h4>
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
@@ -38,6 +39,7 @@
                     <th>Location</th>
                     <th>Order for</th>
                     <th>Order invoice</th>
+                    <th>History</th>
                     <th>Edit</th>
                 </tr>
             </thead>
@@ -51,12 +53,16 @@
                         <td>{{order.order_for}}</td>
                         <td>{{order.order_invoice}}</td>
                         <td>
+                            <a href="{% url 'htmx_tests:order_summary_history' order.id %}">🕘</a>
+                        </td>
+                        <td>
                             <a href="{% url 'htmx_tests:order_summary_edit' order.pk%}">✏️</a>
                         </td>
                     </tr>
                 {% endfor %}
                     <tr>
                         <td class="fw-bold">Orders: {{count}}</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
