@@ -1,4 +1,5 @@
 from django.db import models
+from simple_history.models import HistoricalRecords
 
 # Create your models here.
 
@@ -138,6 +139,7 @@ class OrderSummary(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     orderer = models.ForeignKey(Orderer, on_delete=models.CASCADE)
+    history = HistoricalRecords()
 
     def __str__(self):
         return f"{self.order_number}: {self.location.place}"
