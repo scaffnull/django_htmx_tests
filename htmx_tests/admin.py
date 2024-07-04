@@ -12,7 +12,8 @@ from .models import (
     Location,
     Company,
     Orderer,
-    OrderSummary)
+    OrderSummary,
+    OrderInvoice)
 # Register your models here.
 
 admin.site.register(City)
@@ -28,3 +29,4 @@ admin.site.register(Location)
 admin.site.register(Company)
 admin.site.register(Orderer)
 admin.site.register(OrderSummary)
+admin.site.register(OrderInvoice)

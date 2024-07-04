@@ -149,6 +149,17 @@ class OrderSummary(models.Model):
         same but for other locations"""
         unique_together = ('location', 'order_number')
 
+class OrderInvoice(models.Model):
+    """From the created orders, a feature to invoice the order"""
+    ordersummary = models.ForeignKey(OrderSummary, on_delete=models.CASCADE)
+    invoice_date = models.DateField()
+    invoice_hours = models.IntegerField(null=True)
+    invoice_comment = models.CharField(max_length=200)
+    history = HistoricalRecords()
+
+    def __str__(self):
+        return f"{self.ordersummary.order_number}: {self.ordersummary.orderer}: {self.ordersummary.company} {self.invoice_date}"
+
 '''
 END ORDERS SECTION
 '''
